@@ -9,8 +9,8 @@ import sys
 import argparse
 import os
 # Internal libraries/scripts
-import neural_network as MIScnn_NN
-import evaluation as MIScnn_CV
+import MIScnn.neural_network as MIScnn_NN
+import MIScnn.evaluation as MIScnn_CV
 
 #-----------------------------------------------------#
 #                  Parse command line                 #

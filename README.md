@@ -5,7 +5,8 @@ We participated at the Kidney Tumor Segmentation Challenge 2019 with our newly d
 The aim of MIScnn is to provide an intuitive API allowing fast building of medical
 image segmentation pipelines including data I/O, preprocessing, data augmentation, patch-wise analysis, metrics, a library with state-of-
 the-art deep learning models and model utilization like training, prediction as well as fully automatic evaluation (e.g. cross-validation).
-Even so, high configurability and multiple open interfaces allow full pipeline customization.
+Even so, high configurability and multiple open interfaces allow full pipeline customization. MIScnn is based on Keras with Tensorflow as backend.\
+More information about MIScnn can be found in the publication or on the Git repository: https://github.com/muellerdo/MIScnn
 
 ## MIScnn configuration for the KITS19
 
@@ -36,24 +37,31 @@ Download the interpolated KITS19 data set and create a link:
 In order to train the 3D Residual U-Net model on the KITS19 data set run the MIScnn/train.py script on the data directory link.\
 The Python script contains the used configurations for MIScnn and calls the MIScnn training functions with these configurations.
 
-> python MIScnn/train.py -i data
+> python kits19_train.py -i data
+
+The training process takes up to #X# hours using two Nvidia Quadrop P6000 with #20# GB memory.\
+For the KITS19 prediction, this can be skipped by just using our already fitted model, provided in the sub directory "model/".
 
 ## Prediction of KITS19 test data with MIScnn
 
 In order to make segmentation predictions for the KITS19 test data set with a fitted 3D Residual U-Net model, run the MIScnn/predict.py script on the data directory link.\
 The Python script contains the used configurations for MIScnn and calls the MIScnn prediction functions with these configurations.
 
-> python MIScnn/predict.py -i data
+> python kits19_predict.py -i data
 
 ## 3-fold Cross-Validation on KITS19 train set with MIScnn
 
-plots
+blbalba
+
+> python kits19_evaluate.py -i data
+
+plots and gif
 
 ## Used hardware & software
 
 Ubuntu 18.04\
 Python, MIScnn, Keras, Tensorflow\
-2x Nvidia Quadro P6000 with 24GB memory
+GPU: 2x Nvidia Quadro P6000 with 24GB memory
 
 ## Author
 
