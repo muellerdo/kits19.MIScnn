@@ -1,29 +1,53 @@
-# MIScnn
+# KITS19 participation with MIScnn
 
-A Convolutional Neural Network for the 2019 MICCAI Kidney Tumor Segmentation (KiTS) Challenge.\
-Description blah.
-
-a framework for Medical Imaging Segmentation with Convolutional Neural Networks and deep learning
-
-## Experiments and Results
-
-asd
+description blabla
 
 ## Prerequisites
 
 Python version >= 3.6\
-Pip
+Pip\
+git & git-lfs\
 
-## Installation
+Install the MIScnn framework:
+> git clone https://github.com/muellerdo/kits19.MIScnn.git
+> pip install -r kits19.MIScnn/requirements.txt
 
-Install all required module dependencies with pip and the requirements.txt
+Download the KITS19 data set
+> git clone -b interpolated --single-branch https://github.com/neheller/kits19
 
-> pip install -r requirements.txt
+## Training a model with MIScnn
 
-## Running MIScnn
+Residual 3D U-Net training
 
-bla
-> python MIScnn/Main.py -i <kits19.data>
+> python MIScnn/train.py -i <kits19/data.interpolated>
+
+asda
+
+> cd kits19.MIScnn
+> python MIScnn/train.py -i ../kits19/data
+> cd ../
+
+## Prediction of KITS19 test data with MIScnn
+
+Residual 3D U-Net prediction
+
+> python MIScnn/predict.py -i <kits19/data.interpolated>
+
+asdasd
+
+> cd kits19.MIScnn
+> python MIScnn/predict.py -i ../kits19/data
+> cd ../
+
+## 3-fold Cross-Validation on KITS19 train set using MIScnn
+
+plots
+
+## Used hardware & software
+
+Ubuntu 18.04\
+Python, MIScnn, Keras, Tensorflow\
+GPU
 
 ## Author
 
@@ -35,8 +59,8 @@ Bavaria, Germany
 
 ## How to cite / More information
 
-MIScnn: A Framework for Medical Image Segmentation with Convolutional Neural Networks and Deep Learning\
-Dominik Müller and Frank Kramer
+Dominik Müller and Frank Kramer. (2019)\
+MIScnn: A Framework for Medical Image Segmentation with Convolutional Neural Networks and Deep Learning.
 
 ## License
 

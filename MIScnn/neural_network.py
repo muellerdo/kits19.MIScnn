@@ -13,7 +13,7 @@ from preprocessing import preprocessing_MRIs
 from data_generator import DataGenerator
 from utils.matrix_operations import concat_3Dmatrices
 from utils.callback import TrainingCallback
-from models.unet.standard import Unet
+from models.unet.residual import Unet
 from models.metrics import dice_coefficient, dice_classwise, tversky_loss
 
 #-----------------------------------------------------#
