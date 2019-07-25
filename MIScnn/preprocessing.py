@@ -8,8 +8,8 @@ import itertools
 from tqdm import tqdm
 from keras.utils import to_categorical
 #Internal libraries/scripts
-from data_io import case_loader, backup_batches
-from utils.matrix_operations import slice_3Dmatrix
+from MIScnn.data_io import case_loader, backup_batches
+from MIScnn.utils.matrix_operations import slice_3Dmatrix
 
 #-----------------------------------------------------#
 #          Patches and Batches Preprocessing          #
@@ -55,7 +55,8 @@ def preprocessing_MRIs(cases, config, training=False, validation=False):
         # Create batches from the volume patches
         batches_vol = create_batches(patches_vol,
                                      config["batch_size"],
-                                     steps)
+                                     steps,
+                                     train=training)
         # IF training: Create batches from the segmentation batches
         if training:
             batches_seg = create_batches(patches_seg,
@@ -77,7 +78,7 @@ def preprocessing_MRIs(cases, config, training=False, validation=False):
     return batchPointer
 
 # Create batches from a list of patches
-def create_batches(patches, batch_size, steps):
+def create_batches(patches, batch_size, steps, train=True):
     # Initialize result list
     batches = []
     # Create a batch in each step
@@ -87,7 +88,8 @@ def create_batches(patches, batch_size, steps):
         end = start + batch_size
         if end > len(patches):
             end = len(patches)
-            start = end - batch_size
+            if (end - batch_size) >= 0 and train:
+                start = end - batch_size
         # Concatenate volume patches into the batch
         batch = np.concatenate(patches[start:end], axis=0)
         # Append batch to result batches list

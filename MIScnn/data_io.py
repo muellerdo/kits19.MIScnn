@@ -7,8 +7,8 @@ from re import match
 import numpy as np
 import shutil
 #Internal libraries/scripts
-import utils.mri_sample as MIScnn_MRI
-from utils.nifti_io import load_volume_nii, load_segmentation_nii, save_segmentation
+import MIScnn.utils.mri_sample as MIScnn_MRI
+from MIScnn.utils.nifti_io import load_volume_nii, load_segmentation_nii, save_segmentation
 
 #-----------------------------------------------------#
 #                     Case Loader                     #

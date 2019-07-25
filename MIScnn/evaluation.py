@@ -5,10 +5,10 @@
 import numpy as np
 import math
 # Internal libraries/scripts
-import neural_network as MIScnn_NN
-from utils.visualizer import visualize_training, visualize_evaluation
-from utils.nifti_io import load_segmentation_nii, load_prediction_nii, load_volume_nii
-from data_io import save_evaluation, update_evalpath
+import MIScnn.neural_network as MIScnn_NN
+from MIScnn.utils.visualizer import visualize_training, visualize_evaluation
+from MIScnn.utils.nifti_io import load_segmentation_nii, load_prediction_nii, load_volume_nii
+from MIScnn.data_io import save_evaluation, update_evalpath
 
 #-----------------------------------------------------#
 #                   Cross-Validation                  #

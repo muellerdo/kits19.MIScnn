@@ -50,38 +50,45 @@ args = parser.parse_args()
 #-----------------------------------------------------#
 config = dict()
 # Dataset
-config["cases"] = list(range(2,5))
+config["cases"] = list(range(0,210))
 config["data_path"] = args.args_input           # Path to the kits19 data dir
 config["model_path"] = "model"                  # Path to the model data dir
 config["output_path"] = "predictions"           # Path to the predictions directory
 config["evaluation_path"] = "evaluation"        # Path to the evaluation directory
 # GPU Architecture
-config["gpu_number"] = 1                        # Number of GPUs (if > 2 = multi GPU)
+config["gpu_number"] = 2                        # Number of GPUs (if > 2 = multi GPU)
 # Neural Network Architecture
-config["input_shape"] = (None, 16, 16, 1)       # Neural Network input shape
-config["patch_size"] = (16, 16, 16)             # Patch shape/size
+config["input_shape"] = (None, 128, 128, 1)     # Neural Network input shape
+config["patch_size"] = (48, 128, 128)           # Patch shape/size
 config["classes"] = 3                           # Number of output classes
-config["batch_size"] = 16                       # Number of patches in on step
+config["batch_size"] = 15                       # Number of patches in on step
 # Training
-config["epochs"] = 5                            # Number of epochs for training
+config["epochs"] = 15                           # Number of epochs for training
 config["max_queue_size"] = 3                    # Number of preprocessed batches
 config["learninig_rate"] = 0.0001               # Learninig rate for the training
 config["shuffle"] = True                        # Shuffle batches for training
 # Data Augmentation
-config["overlap"] = (0,0,0)                     # Overlap in (x,y,z)-axis
+config["overlap"] = (12, 32, 32)                # Overlap in (x,y,z)-axis
 config["skip_blanks"] = True                    # Skip patches with only background
 config["scale_input_values"] = False            # Scale volume values to [0,1]
-config["rotation"] = False                      # Rotate patches in 90/180/270°
-config["flipping"] = False                      # Reflect/Flip patches
+config["rotation"] = True                       # Rotate patches in 90/180/270°
+config["flipping"] = True                       # Reflect/Flip patches
 config["flip_axis"] = (3)                       # Define the flipping axes (x,y,z <-> 1,2,3)
 # Prediction
 config["pred_overlap"] = False                  # Usage of overlapping patches in prediction
 # Evaluation
 config["n_folds"] = 3                           # Number of folds for cross-validation
-config["per_split"] = 0.20                      # Percentage of Testing Set for split-validation
-config["n_loo"] = 1                             # Number of cycles for leave-one-out
+config["per_split"] = 0.095                     # Percentage of Testing Set for split-validation
+config["n_loo"] = 3                             # Number of cycles for leave-one-out
 config["visualize"] = True                      # Print out slice images for visual evaluation
 config["class_freq"] = False                    # Calculate the class frequencies for each slice
+
+#-----------------------------------------------------#
+#          GPU Management for shared hardware         #
+#-----------------------------------------------------#
+import tensorflow as tf
+gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.65)
+sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 
 #-----------------------------------------------------#
 #                    Runner code                      #
@@ -89,21 +96,5 @@ config["class_freq"] = False                    # Calculate the class frequencie
 # Output the configurations
 print(config)
 
-# Create the Convolutional Neural Network
-#cnn_model = MIScnn_NN.NeuralNetwork(config)
-
-# Train the Convolutional Neural Network model
-#cnn_model.train(config["cases"])
-# Dump the model
-#cnn_model.dump("model")
-
-# Load a model
-#cnn_model.load("model")
-
-# Predict a segmentation with the Convolutional Neural Network model
-#cnn_model.predict(list(range(3,4)))
-
 # Evaluate the Convolutional Neural Network
-#MIScnn_CV.cross_validation(config)
-#MIScnn_CV.leave_one_out(config)
 MIScnn_CV.split_validation(config)

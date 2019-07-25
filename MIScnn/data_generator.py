@@ -5,7 +5,7 @@
 import keras
 import numpy as np
 #Internal libraries/scripts
-from data_io import batch_load
+from MIScnn.data_io import batch_load
 
 #-----------------------------------------------------#
 #              MRI Data Generator (Keras)             #
