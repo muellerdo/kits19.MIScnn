@@ -6,7 +6,7 @@ The aim of MIScnn is to provide an intuitive API allowing fast building of medic
 image segmentation pipelines including data I/O, preprocessing, data augmentation, patch-wise analysis, metrics, a library with state-of-the-art
 deep learning models and model utilization like training, prediction as well as fully automatic evaluation (e.g. cross-validation).
 Even so, high configurability and multiple open interfaces allow full pipeline customization. MIScnn is based on Keras with Tensorflow as backend.\
-More information about MIScnn can be found in the publication or on the Git repository: https://github.com/muellerdo/MIScnn
+More information about MIScnn can be found in the publication or on the Git repository: https://github.com/frankkramer-lab/MIScnn
 
 The task of the KITS19 challenge was to compute a semantic segmentation of arterial phase abdominal CT scans from 300 kidney cancer patients. Each pixel had to be labeled into one of three classes: Background, kidney or tumor. The original scans have an image resolution of 512x512 and on average 216 slices (highest slice number is 1059).
 
@@ -15,14 +15,11 @@ The task of the KITS19 challenge was to compute a semantic segmentation of arter
 For the deep learning model architecture, we selected a 3D Residual U-Net model for in-depth image processing
 over all three axes. We selected a patch-wise analysis with 48x128x128 patches without pixel value normalization in the preprocessing,
 but full data augmentation (translation, rotation and flipping) with 12x32x32 patch overlaps.
-During training, blank patches were skipped and no overlapping patches are created for prediction. The
-whole KITS19 interpolated data set were used for fitting. The training was performed using the Tversky loss (alpha&beta == 0.5) for #20#
-epochs with a learning rate of 1E-4, batch shuffling and a batch size of 15.
+During training, blank patches were skipped and overlapping patches are created for prediction. The whole KITS19 interpolated data set were used for fitting. The training was performed using the Tversky loss for 20 epochs with a learning rate of 1E-4, batch shuffling and a batch size of 15.
 
 ## Prerequisites
 
 Python version >= 3.6\
-Pip\
 git & git-lfs
 
 Install the MIScnn framework:
@@ -51,7 +48,7 @@ The Python script contains the used configurations for MIScnn and calls the MISc
 python kits19_train.py -i data
 ```
 
-The training process takes up to #X# hours using two Nvidia Quadrop P6000 with in total 31 GB memory.\
+The training process takes up to 37 hours using two Nvidia Quadrop P6000 with in total 30 GB memory.\
 The resulting fitted model was saved under the sub directory "model/".\
 For the KITS19 prediction, the training can be skipped by just using the already fitted model file.
 
