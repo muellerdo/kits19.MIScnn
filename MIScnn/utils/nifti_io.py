@@ -90,7 +90,7 @@ def save_segmentation(seg, cid, output_path):
         )
     # Convert numpy array to NIFTI
     nifti = nib.Nifti1Image(seg, None)
-    nifti.get_data_dtype() == seg.dtype
+    # nifti.get_data_dtype() = seg.dtype
     # Save segmentation to disk
     nib.save(nifti, os.path.join(output_path,
                                  "prediction_" + str(cid).zfill(5) + ".nii.gz"))

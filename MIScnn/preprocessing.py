@@ -50,6 +50,11 @@ def preprocessing_MRIs(cases, config, training=False, validation=False):
                 patches_vol, patches_seg = flip_patches(patches_vol,
                                                         patches_seg,
                                                         config["flip_axis"])
+        # Resize patches if requried
+        if not training and \
+            patches_vol[0].shape != ((1,) + config["patch_size"] + (1,)):
+            patches_vol = resize_patch(patches_vol,
+                                       config["patch_size"])
         # Calculate the number of batches for this MRI
         steps = math.ceil(len(patches_vol) / config["batch_size"])
         # Create batches from the volume patches
@@ -100,6 +105,12 @@ def create_batches(patches, batch_size, steps, train=True):
 #-----------------------------------------------------#
 #            Other preprocessing functions            #
 #-----------------------------------------------------#
+# Resize image if smaller than patch size
+def resize_patch(patches_list, patch_shape):
+    for i, patch in enumerate(patches_list):
+        patches_list[i] = np.resize(patch, (1,) + (patch_shape) + (1,))
+    return patches_list
+
 # Remove all blank patches (with only background)
 def remove_blanks(patches_vol, patches_seg, background_class=0):
     # Iterate over each patch
