@@ -1,5 +1,12 @@
 # KITS19 participation with MIScnn
 
+**UPDATE - Start:**  
+A new version with improved performance is available as a JupyterNotebook, here:  
+https://github.com/frankkramer-lab/MIScnn/blob/master/examples/KiTS19.ipynb  
+Furthermore, models, predictions, visualizations and evaluation are available under the following link:  
+https://zenodo.org/record/5118529#.YPfiJjqxW5A  
+**UPDATE - End:**  
+
 We participated at the Kidney Tumor Segmentation Challenge 2019 (KITS19) with our newly developed framework for medical image segmentation. MIScnn: A Framework for Medical Image Segmentation with Convolutional Neural Networks and Deep Learning.
 
 The aim of MIScnn is to provide an intuitive API allowing fast building of medical
